@@ -1,0 +1,49 @@
+{% extends 'account/base.html' %}
+{% block content %}
+  <h2>View Profile</h2>
+  <h3>Profile Information</h3>
+  <p>First Name: {{ profile.first_name }}</p>
+  <p>Last Name: {{ profile.last_name }}</p>
+  <p>Weight: {{ profile.weight }}</p>
+  <p>Height: {{ profile.height }}</p>
+  <p>Region: {{ profile.region }}</p>
+  <p>Province: {{ profile.province }}</p>
+  <p>Municipality: {{ profile.municipality }}</p>
+  <p>Availability: {{ profile.availability }}</p>
+  <p>Blood Type: {{ profile.blood_type }}</p>
+
+    <form action="{% url 'toggle_availability' %}" method="post">
+    {% csrf_token %}
+    <button type="submit" class="btn btn-primary">
+        {% if profile.availability %}
+            Set Availability to False
+        {% else %}
+            Set Availability to True
+        {% endif %}
+    </button>
+</form>
+
+<!-- Add other content as needed -->
+
+
+    
+  <h3>My Blood Donation Requests</h3>
+  <ul>
+    {% for request in donation_requests %}
+      <li>
+        <strong>Request Type:</strong> {{ request.request_type }}<br>
+        <strong>Blood Type:</strong> {{ request.blood_type }}<br>
+        <strong>Region:</strong> {{ request.region }}<br>
+        <strong>Province:</strong> {{ request.province }}<br>
+        <strong>Municipality:</strong> {{ request.municipality }}<br>
+        <strong>Created At:</strong> {{ request.created_at }}<br>
+        <strong>Updated At:</strong> {{ request.updated_at }}<br>
+        <a href="{% url 'blooddonationrequest_update' request.pk %}">Edit</a> |
+        <a href="{% url 'blooddonationrequest_delete' request.pk %}">Delete</a>
+      </li>
+    {% empty %}
+      <li>No donation requests.</li>
+    {% endfor %}
+  </ul>
+  <a href="{% url 'blooddonationrequest_create' %}" class="btn btn-primary">Create New Request</a>
+{% endblock %}

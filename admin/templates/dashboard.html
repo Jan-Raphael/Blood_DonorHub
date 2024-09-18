@@ -1,0 +1,69 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title><!-- templates/admin/dashboard.html -->
+{% extends 'base.html' %}
+{% block content %}
+<h2>Admin Dashboard</h2>
+
+<h3>Blood Donation Requests</h3>
+<table>
+    <thead>
+        <tr>
+            <th>User</th>
+            <th>Request Type</th>
+            <th>Blood Type</th>
+            <th>Region</th>
+            <th>Province</th>
+            <th>Municipality</th>
+            <th>Actions</th>
+        </tr>
+    </thead>
+    <tbody>
+        {% for request in blood_requests %}
+        <tr>
+            <td>{{ request.user }}</td>
+            <td>{{ request.request_type }}</td>
+            <td>{{ request.blood_type }}</td>
+            <td>{{ request.region }}</td>
+            <td>{{ request.province }}</td>
+            <td>{{ request.municipality }}</td>
+            <td>
+                <a href="{% url 'edit_blood_request' request.pk %}">Edit</a> |
+                <a href="{% url 'delete_blood_request' request.pk %}">Delete</a>
+            </td>
+        </tr>
+        {% endfor %}
+    </tbody>
+</table>
+
+<h3>Users</h3>
+<table>
+    <thead>
+        <tr>
+            <th>Username</th>
+            <th>Email</th>
+            <th>Actions</th>
+        </tr>
+    </thead>
+    <tbody>
+        {% for user in users %}
+        <tr>
+            <td>{{ user.username }}</td>
+            <td>{{ user.email }}</td>
+            <td>
+                <a href="{% url 'edit_user' user.pk %}">Edit</a> |
+                <a href="{% url 'delete_user' user.pk %}">Delete</a>
+            </td>
+        </tr>
+        {% endfor %}
+    </tbody>
+</table>
+{% endblock %}
+</title>
+</head>
+<body>
+
+</body>
+</html>

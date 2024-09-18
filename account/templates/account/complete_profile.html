@@ -1,0 +1,58 @@
+{% extends 'account/base.html' %}
+{% block content %}
+<h2>Complete Your Profile</h2>
+<form method="POST">
+    {% csrf_token %}
+    <div class="form-group">
+        {{ form.first_name.label_tag }} {{ form.first_name }}
+    </div>
+    <div class="form-group">
+        {{ form.last_name.label_tag }} {{ form.last_name }}
+    </div>
+    <div class="form-group">
+        {{ form.weight.label_tag }} {{ form.weight }}
+    </div>
+    <div class="form-group">
+        {{ form.height.label_tag }} {{ form.height }}
+    </div>
+    <div class="form-group">
+        {{ form.region.label_tag }}
+        <select name="region" id="id_region" class="form-control">
+            <option value="">Select Region</option>
+            <option value="Region III" {% if form.region.value == "Region III" %}selected{% endif %}>Region III</option>
+            <option value="Region IV-A" {% if form.region.value == "Region IV-A" %}selected{% endif %}>Region IV-A</option>
+        </select>
+    </div>
+    <div class="form-group">
+        {{ form.province.label_tag }}
+        <select name="province" id="id_province" class="form-control">
+            <option value="">Select Province</option>
+            <option value="Pampanga" {% if form.province.value == "Pampanga" %}selected{% endif %}>Pampanga</option>
+            <option value="Tarlac" {% if form.province.value == "Tarlac" %}selected{% endif %}>Tarlac</option>
+            <option value="Laguna" {% if form.province.value == "Laguna" %}selected{% endif %}>Laguna</option>
+            <option value="Cavite" {% if form.province.value == "Cavite" %}selected{% endif %}>Cavite</option>
+        </select>
+    </div>
+    <div class="form-group">
+        {{ form.municipality.label_tag }}
+        <select name="municipality" id="id_municipality" class="form-control">
+            <option value="">Select Municipality</option>
+            <option value="San Fernando" {% if form.municipality.value == "San Fernando" %}selected{% endif %}>San Fernando</option>
+            <option value="Angeles" {% if form.municipality.value == "Angeles" %}selected{% endif %}>Angeles</option>
+            <option value="Tarlac City" {% if form.municipality.value == "Tarlac City" %}selected{% endif %}>Tarlac City</option>
+            <option value="Concepcion" {% if form.municipality.value == "Concepcion" %}selected{% endif %}>Concepcion</option>
+            <option value="Calamba" {% if form.municipality.value == "Calamba" %}selected{% endif %}>Calamba</option>
+            <option value="Santa Rosa" {% if form.municipality.value == "Santa Rosa" %}selected{% endif %}>Santa Rosa</option>
+            <option value="Bacoor" {% if form.municipality.value == "Bacoor" %}selected{% endif %}>Bacoor</option>
+            <option value="Dasmariñas" {% if form.municipality.value == "Dasmariñas" %}selected{% endif %}>Dasmariñas</option>
+        </select>
+    </div>
+    <div class="form-group">
+        {{ form.blood_type.label_tag }} {{ form.blood_type }}
+    </div>
+    <div class="form-group">
+        {{ form.availability.label_tag }} {{ form.availability }}
+    </div>
+    <button type="submit" class="btn btn-primary">Submit</button>
+</form>
+{% endblock %}
